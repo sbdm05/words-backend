@@ -29,4 +29,4 @@ const WordSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model('Word', WordSchema);
+module.exports = mongoose.model('Data', WordSchema);
