@@ -15,17 +15,17 @@ const WordSchema = new mongoose.Schema({
   english__1: {
     type: String,
   },
-  syn: {
+  syn_: {
     type: String,
   },
   etym: {
     type: String,
   },
-  english: {
-    type: Number,
-  },
   mobile_share: {
     type: String,
+  },
+  likes: {
+    type: Number,
   },
 });
 

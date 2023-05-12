@@ -6,8 +6,7 @@ const getWords = async (req, res) => {
   // res.send('OK')
   try {
     // utiliser la méthode Model.find({})
-    const words = await Data.findOne({meaning:
-'Bière de la marque 1664.'});
+    const words = await Data.findOne({ meaning: 'Bière de la marque 1664.' });
     console.log(words);
     return res.json({ success: true, words: words });
   } catch (error) {
@@ -16,25 +15,47 @@ const getWords = async (req, res) => {
   }
 };
 
-const getSampleWords = async(req, res)=>{
+const getSampleWords = async (req, res) => {
   Data.aggregate([{ $sample: { size: 100 } }])
     .then((result) => {
       console.log(result);
-      res.json({success: true, nberOfItems:result.length, data: result})
+      res.json({ success: true, nberOfItems: result.length, data: result });
     })
     .catch((err) => {
       console.log(err);
     });
-}
+};
 
+const updateLike = async (req, res) => {
+  // retrouver l'obj concerné
+  // mettre à jour la valeur du like
+  try {
+    // on récupère la propriété _id
+    const { _id } = req.body;
+    console.log(req.body);
+    // on recherche l'objet concerné
+    const word = await Data.findOneAndUpdate({ _id: _id }, req.body, {
+      new: true,
+      runValidators: true,
+    });
+
+    // gérer si pas de word
+    if (!word) {
+      return res.status(400).json({ msg: 'pas de mot avec cette id' });
+    }
+    res.json({ success: true, msg: word });
+  } catch (error) {
+    res.status(500).json({ msg: error });
+  }
+};
 // getRandomWord
 
 // search
 
 module.exports = {
   getWords,
-  getSampleWords
+  getSampleWords,
+  updateLike,
 };
-
 
 // error 504 sur vercel => solution, limiter le nombre de documents demandés
