@@ -6,7 +6,8 @@ const getWords = async (req, res) => {
   // res.send('OK')
   try {
     // utiliser la méthode Model.find({})
-    const words = await Data.find({});
+    const words = await Data.findOne({meaning:
+'Bière de la marque 1664.'});
     console.log(words);
     return res.json({ success: true, words: words });
   } catch (error) {
