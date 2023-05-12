@@ -21,11 +21,6 @@ app.use('/api/v1/words', wordsRoutes);
 
 // adresse à utiliser en local =>  localhost:4000
 const port = process.env.PORT || 4000;
-if(typeof process.env.MONGO_URI === 'string'){
-  console.log('string', process.env.MONGO_URI);
-}else{
-  console.log('echec');
-}
 
 const start = async () => {
   if (typeof process.env.MONGO_URI === 'string') {

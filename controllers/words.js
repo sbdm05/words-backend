@@ -16,10 +16,25 @@ const getWords = async (req, res) => {
   }
 };
 
+const getSampleWords = async(req, res)=>{
+  Data.aggregate([{ $sample: { size: 100 } }])
+    .then((result) => {
+      console.log(result);
+      res.json({success: true, nberOfItems:result.length, data: result})
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+}
+
 // getRandomWord
 
 // search
 
 module.exports = {
   getWords,
+  getSampleWords
 };
+
+
+// error 504 sur vercel => solution, limiter le nombre de documents demandés
