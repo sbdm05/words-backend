@@ -51,11 +51,30 @@ const updateLike = async (req, res) => {
 // getRandomWord
 
 // search
+const searchWord = async (req, res) => {
+  try {
+    const { inputToSearch } = req.body;
+    console.log(inputToSearch);
+
+    const words = await Data.find({ $text: { $search: inputToSearch } });
+    if (words.length > 0) {
+      console.log(`${words.length} words found`);
+      console.log(words);
+      res.json({ success: true, msg: words });
+    } else {
+      console.log('No words found');
+      res.json({ success: true, msg: 'No words were found' });
+    }
+  } catch (error) {
+    res.status(500).json({ msg: error });
+  }
+};
 
 module.exports = {
   getWords,
   getSampleWords,
   updateLike,
+  searchWord,
 };
 
 // error 504 sur vercel => solution, limiter le nombre de documents demandés

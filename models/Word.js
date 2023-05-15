@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 
 // on crée la structure de Todo
 const WordSchema = new mongoose.Schema({
+  
   // key/value pair
   french: {
     type: String,
@@ -27,6 +28,13 @@ const WordSchema = new mongoose.Schema({
   likes: {
     type: Number,
   },
+  isLiked: {
+    type: Boolean,
+  },
+  isSaved: {
+    type: Boolean,
+  },
 });
+WordSchema.index({ french: 'text' });
 
 module.exports = mongoose.model('Data', WordSchema);
