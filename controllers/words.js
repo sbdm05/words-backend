@@ -56,7 +56,9 @@ const searchWord = async (req, res) => {
     const { french } = req.body;
     console.log(french);
 
-    const words = await Data.find({ $text: { $search: french } });
+    const words = await Data.find({
+      french: { $regex: `^${inputToSearch}`, $options: 'i' },
+    });
     if (words.length > 0) {
       console.log(`${words.length} words found`);
       console.log(words);
