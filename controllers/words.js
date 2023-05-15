@@ -53,10 +53,10 @@ const updateLike = async (req, res) => {
 // search
 const searchWord = async (req, res) => {
   try {
-    const { inputToSearch } = req.body;
-    console.log(inputToSearch);
+    const { french } = req.body;
+    console.log(french);
 
-    const words = await Data.find({ $text: { $search: inputToSearch } });
+    const words = await Data.find({ $text: { $search: french } });
     if (words.length > 0) {
       console.log(`${words.length} words found`);
       console.log(words);
