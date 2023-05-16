@@ -16,7 +16,7 @@ const getWords = async (req, res) => {
 };
 
 const getSampleWords = async (req, res) => {
-  Data.aggregate([{ $sample: { size: 100 } }])
+  Data.aggregate([{ $sample: { size: 10 } }])
     .then((result) => {
       console.log(result);
       res.json({ success: true, nberOfItems: result.length, data: result });
