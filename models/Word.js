@@ -35,6 +35,7 @@ const WordSchema = new mongoose.Schema({
     type: Boolean,
   },
 });
+// utile pour faire une recherche
 WordSchema.index({ french: 'text' });
 
 module.exports = mongoose.model('Data', WordSchema);
